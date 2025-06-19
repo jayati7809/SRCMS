@@ -1,0 +1,150 @@
+
+  :root {
+    --primary-color: #4f46e5;
+    --bot-bg: #e2e8f0;
+    --user-bg: #4f46e5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --card-bg: #ffffff;
+    --input-bg: #f1f5f9;
+    --border-color: #cbd5e1;
+    --hover-color: #6366f1;
+    --button-bg: #4f46e5;
+  }
+  
+  body {
+    background: linear-gradient(to right, #f8fafc, #e2e8f0);
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: var(--text-primary);
+  }
+  
+  .chat-container {
+    max-width: 850px;
+    width: 100%;
+    height: 90vh;
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card {
+    height: 100%;
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+  }
+  
+  .card-header {
+    background: var(--border-color);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .user_info span {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    color: var(--button-bg); 
+  }
+  
+  .user_info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+  
+  .msg_card_body {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  
+  /* Message input section */
+  .card-footer {
+    background: var(--border-color);
+    padding: 1rem;
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  
+  /* Input field */
+  .type_msg {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 2rem;  /* Fully rounded edges */
+    padding: 0.8rem 1.5rem;
+    flex: 1;
+    transition: border 0.3s;
+    font-size: 0.9rem; /* Smaller text */
+  }
+  
+  .type_msg:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+  
+  /* Buttons styling */
+  .input-group-text {
+    background-color: var(--button-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .input-group-text i {
+    font-size: 1.2rem;
+  }
+  
+  .input-group-text:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.1);
+  }
+  
+  /* Spacing for buttons */
+  .attach_btn {
+    margin-right: 10px; /* Space between image upload and voice message */
+  }
+  
+  .voice_btn {
+    margin-right: 10px; /* Space between voice message and send button */
+  }
+  
+  @media (max-width: 768px) {
+    .chat-container {
+      height: 100vh;
+      border-radius: 0;
+    }
+  
+    .msg_cotainer, .msg_cotainer_send {
+      max-width: 85%;
+    }
+  
+    .card-footer {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  
+    .input-group-text {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  

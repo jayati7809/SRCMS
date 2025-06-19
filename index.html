@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRCMS Chat</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="cht.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="card">
+      <div class="card-header">
+        <button class="btn btn-secondary" type="button" id="hamburgerButton">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div id="menu" class="menu">
+          <button type="button" class="btn-close" aria-label="Close" id="closeMenu"></button>
+          <div style="padding-top: 0.5rem;">
+            <a class="dropdown-item" href="#" id="newChat">New Chat</a>
+            <a class="dropdown-item" href="#">Media</a>
+            <a class="dropdown-item" id="themeBtn">Theme</a>
+            <a class="dropdown-item" href="#" id="profileLink">Profile</a>
+            <a class="dropdown-item" href="#">About Us</a>
+          </div>
+        </div>
+        <div class="user_info" style="color:#3a6f9e;font-size: large;">
+          <span><b>SRCMS Support</span>
+          <p>We're here to help!</p></b>
+        </div>
+      </div>
+      <div class="card-body msg_card_body" id="messageFormeight"></div>
+      <div class="card-footer">
+        <form id="messageArea" class="input-group">
+          <label for="imageUpload" class="input-group-text attach_btn">
+            <i class="fas fa-image"></i>
+          </label>
+          <input type="file" id="imageUpload" accept="image/*" hidden>
+          <button type="button" class="input-group-text voice_btn" id="voiceBtn">
+            <i class="fas fa-microphone"></i>
+          </button>
+          <input type="text" id="text" name="msg" placeholder="Type your message..." 
+                 class="form-control type_msg" autocomplete="off" required>
+          <button type="submit" class="input-group-text send_btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="user-initial" style="font-size: 50px; text-align: center; margin-top: 20px;"></div>
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="profileModalLabel">Profile Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Full Name:</strong> <span id="profileFullName"></span></p>
+          <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+          <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="cht.js"></script>
+  <script>
+    document.getElementById("profileLink").addEventListener("click", function() {
+      const fullName = localStorage.getItem("fullname");
+      const email = localStorage.getItem("email");
+      const username = localStorage.getItem("username");
+
+      document.getElementById("profileFullName").textContent = fullName || "N/A";
+      document.getElementById("profileEmail").textContent = email || "N/A";
+      document.getElementById("profileUsername").textContent = username || "N/A";
+
+      const profileModal = new bootstrap.Modal(document.getElementById("profileModal"));
+      profileModal.show();
+    });
+  </script>
+</body>
+</html>

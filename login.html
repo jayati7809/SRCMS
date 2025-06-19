@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .toggle-link {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 15px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Chatbot Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error-message" class="error"></p>
+        <span class="toggle-link" onclick="toggleForms()">Don't have an account? Sign up</span>
+    </div>
+
+    <div class="container" id="signup-container" style="display: none;">
+        <h2>Chatbot Sign Up</h2>
+        <form id="signupForm">
+            <div class="input-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="username-signup">Username:</label>
+                <input type="text" id="username-signup" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password-signup">Password:</label>
+                <input type="password" id="password-signup" name="password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p id="signup-error-message" class="error"></p>
+        <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
+    </div>
+
+    <script>
+        function toggleForms() {
+            const loginContainer = document.getElementById("login-container");
+            const signupContainer = document.getElementById("signup-container");
+            if (loginContainer.style.display === "none") {
+                loginContainer.style.display = "block";
+                signupContainer.style.display = "none";
+            } else {
+                loginContainer.style.display = "none";
+                signupContainer.style.display = "block";
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get username and password values
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Simple validation
+            if (username === "" || password === "") {
+                document.getElementById("login-error-message").textContent = "Please fill in both fields.";
+            } else {
+                // For demonstration, you can validate against hardcoded credentials
+                if (username === "admin" && password === "password123") {
+                    window.location.href = "index.html"; // Redirect to index page
+                } else {
+                    document.getElementById("login-error-message").textContent = "Invalid username or password.";
+                }
+            }
+        });
+
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const fullname = document.getElementById("fullname").value;
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username-signup").value;
+            const password = document.getElementById("password-signup").value;
+
+            // Simple validation
+            if (fullname === "" || email === "" || username === "" || password === "") {
+                document.getElementById("signup-error-message").textContent = "Please fill in all fields.";
+            } else {
+                // For demonstration, assume sign-up is always successful
+                document.getElementById("signup-error-message").textContent = "Sign-up successful! Redirecting to login...";
+                setTimeout(() => {
+                    // Store the first letter of the full name in local storage
+                    localStorage.setItem("userInitial", fullname.charAt(0).toUpperCase());
+                    window.location.href = "index.html"; // Redirect to index page
+                }, 2000); // Redirect after 2 seconds
+            }
+        });
+
+        // Display the user's initial on the index page
+        window.addEventListener("load", function() {
+            const userInitial = localStorage.getItem("userInitial");
+            if (userInitial) {
+                document.getElementById("user-initial").textContent = userInitial;
+            }
+        });
+    </script>
+</body>
+</html>
